@@ -16,20 +16,15 @@
              ">
     <nav id="navbar-example3" class="h-100 flex-column align-items-stretch border-end">
         <nav class="nav nav-pills flex-column">
-            <a class="nav-link hover" href="#home">Home</a>
-            <a class="nav-link hover" href="#about">About</a>
-            <a class="nav-link hover" href="#service">Service</a>
-            <nav class="nav nav-pills flex-column">
+            <a class="nav-link hover" th:href="@{/}">Home</a>
+            <a class="nav-link hover" th:href="@{'/#about'}">About</a>
+            <a class="nav-link hover" th:href="@{'/#service'}">Service</a>
+            <nav th:each="theServiceType : ${theServiceType}" class="nav nav-pills flex-column">
                 <a class="nav-link ms-3 my-1 hover"
-                   href="/AD_Network/MainController?view=viewInternetService">Internet</a>
-                <a class="nav-link ms-3 my-1 hover"
-                   href="/AD_Network/MainController?view=viewCloudService">Cloud</a>
-                <a class="nav-link ms-3 my-1 hover" href="/AD_Network/MainController?view=viewTelevisionService">Television</a>
-                <a class="nav-link ms-3 my-1 hover"
-                   href="/AD_Network/MainController?view=viewCameraService">Camera</a>
+                   th:href="@{/services/{theServiceType}(theServiceType=${theServiceType.serviceTypeName.toLowerCase()})}" th:text="${theServiceType.serviceTypeName}"></a>
             </nav>
             <a class="nav-link hover" th:href="@{/coming_soon}">Support</a>
-            <a class="nav-link hover" href="#details">Details</a>
+            <a class="nav-link hover" th:href="@{'/#details'}">Details</a>
         </nav>
     </nav>
 </div>

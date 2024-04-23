@@ -21,7 +21,7 @@ CREATE TABLE RequestType (requestTypeId int IDENTITY NOT NULL, requestTypeName n
 CREATE TABLE Roles (roleId int IDENTITY NOT NULL, roleName nvarchar(255) NOT NULL, PRIMARY KEY (roleId));
 CREATE TABLE [Service] (serviceId int IDENTITY NOT NULL, deviceId int NOT NULL, serviceTypeId int NOT NULL, serviceStatusId int NOT NULL, price money NOT NULL, serviceName nvarchar(255) NOT NULL, PRIMARY KEY (serviceId));
 CREATE TABLE ServiceStatus (serviceStatusId int IDENTITY NOT NULL, serviceStatusName nvarchar(255) NOT NULL, PRIMARY KEY (serviceStatusId));
-CREATE TABLE ServiceType (serviceTypeId int IDENTITY NOT NULL, serviceTypeName nvarchar(255) NOT NULL, PRIMARY KEY (serviceTypeId));
+CREATE TABLE ServiceType (serviceTypeId int IDENTITY NOT NULL, serviceTypeName nvarchar(255) NOT NULL, [description] nvarchar(Max),PRIMARY KEY (serviceTypeId));
 CREATE TABLE [Status] (statusId int IDENTITY NOT NULL, statusName nvarchar(255) NULL, PRIMARY KEY (statusId));
 CREATE TABLE [Transaction] (transactionId int IDENTITY NOT NULL, contractId int NOT NULL, paymentId int NOT NULL, transStatusId int NOT NULL, transTypeId int NOT NULL, transAmount money NOT NULL, transTime datetime NOT NULL, PRIMARY KEY (transactionId));
 CREATE TABLE TransStatus (transStatusId int IDENTITY NOT NULL, transStatusName nvarchar(255) NOT NULL, PRIMARY KEY (transStatusId));
@@ -11421,11 +11421,11 @@ INSERT INTO [District]([districtId], [cityId], [districtName]) VALUES
 --Service
 -------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [serviceType] ([serviceTypeName]) VALUES
-    ('Internet'),
-	('Cloud'), 
-	('Camera'),
-	('Television');
+INSERT INTO [serviceType] ([serviceTypeName], [description]) VALUES
+    ('Internet', 'Advancements in internet infrastructure further bolster this trend, facilitating faster connections and enhancing user experiences online.'),
+	('Cloud', 'Cloud storage offers scalable, flexible, and secure data storage solutions, revolutionizing how information is stored, accessed, and managed.'), 
+	('Camera', 'Television services provide a diverse array of entertainment, news, and educational content, shaping global culture and communication dynamics.'),
+	('Television', 'Camera capture moments, preserve memories, and offer a unique perspective on the world, enabling creativity and storytelling across diverse mediums.');
 
 INSERT INTO [ServiceStatus] ([serviceStatusName]) VALUES
 	(N'Hết hàng'),

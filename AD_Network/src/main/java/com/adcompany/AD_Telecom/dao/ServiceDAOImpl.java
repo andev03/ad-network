@@ -18,9 +18,15 @@ public class ServiceDAOImpl implements ServiceDAO {
     }
 
     @Override
-    public List<Service> getServiceByTypeId(int serviceTypeId) {
-        TypedQuery<Service> query = entityManager.createQuery("Select s From Service s Where s.serviceTypeId.serviceTypeId = :serviceTypeId", Service.class);
-        query.setParameter("serviceTypeId", serviceTypeId);
+    public List<Service> getServiceType() {
+        TypedQuery<Service> query = entityManager.createQuery("Select st From ServiceType st", Service.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Service> getServiceByTypeName(String serviceTypeName) {
+        TypedQuery<Service> query = entityManager.createQuery("Select s From Service s Where s.serviceTypeId.serviceTypeName = :serviceTypeName", Service.class);
+        query.setParameter("serviceTypeName", serviceTypeName);
         return query.getResultList();
     }
 }

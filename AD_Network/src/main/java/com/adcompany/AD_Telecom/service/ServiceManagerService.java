@@ -1,10 +1,10 @@
-package com.adcompany.AD_Telecom.dao;
+package com.adcompany.AD_Telecom.service;
 
 import com.adcompany.AD_Telecom.model.Service;
 
 import java.util.List;
 
-public interface ServiceDAO {
+public interface ServiceManagerService {
 
     List<Service> getServiceType();
     List<Service> getServiceByTypeName(String serviceTypeName);
