@@ -17,7 +17,7 @@ public class InternetController {
         this.serviceManagerService = serviceManagerService;
     }
 
-    @GetMapping("/{internet}")
+    @GetMapping("/{internetId}")
     public String getService(Model theModel) {
         theModel.addAttribute("service", serviceManagerService.getServiceByTypeName("internet"));
         return "/views/customer/service/internet_service";

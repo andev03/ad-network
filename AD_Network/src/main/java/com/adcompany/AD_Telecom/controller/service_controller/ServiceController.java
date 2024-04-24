@@ -1,6 +1,5 @@
 package com.adcompany.AD_Telecom.controller.service_controller;
 
-import com.adcompany.AD_Telecom.dao.ServiceDAO;
 import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/services")

@@ -1,6 +1,8 @@
 package com.adcompany.AD_Telecom.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Province")
 public class Province {
@@ -23,7 +26,6 @@ public class Province {
     @JsonBackReference
     @OneToMany(mappedBy = "cityId")
     private List<City> cityId;
-
 
     public Province(String provinceName) {
         this.provinceName = provinceName;

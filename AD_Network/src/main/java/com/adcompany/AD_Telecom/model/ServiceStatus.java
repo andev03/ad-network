@@ -1,6 +1,7 @@
 package com.adcompany.AD_Telecom.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
+// No serializable hibernateLazyInitializer and handler to avoid InvalidDefinitionException of Lazy loading
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "ServiceStatus")
 public class ServiceStatus {

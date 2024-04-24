@@ -14,7 +14,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private int cusId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "locationId", referencedColumnName = "locationId")
@@ -24,7 +24,6 @@ public class Customer {
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     private Status statusId;
 
-    @Column(unique = true)
     private String phoneNumber;
 
     private String firstName;

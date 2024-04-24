@@ -1,5 +1,7 @@
 package com.adcompany.AD_Telecom.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Status")
 public class Status {
@@ -21,12 +24,19 @@ public class Status {
 
     private String statusName;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
-    private Customer customerId;
+    @JsonBackReference
+    @OneToMany(mappedBy = "cusId")
+    private List<Customer> cusId;
 
     public Status(String statusName) {
         this.statusName = statusName;
     }
 
+    private void addCustomer(Customer tempCustomer){
+        if (cusId == null) {
+            cusId = new ArrayList<>();
+        }
+        cusId.add(tempCustomer);
+        tempCustomer.setStatusId(this);
+    }
 }
