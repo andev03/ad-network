@@ -11,7 +11,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cityId"})
 @Entity
 @Table(name = "District")
 public class District {
@@ -20,7 +20,7 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int districtId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "cityId")
     private City cityId;
 

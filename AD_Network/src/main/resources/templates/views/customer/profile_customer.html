@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Account Profile</title>
+    <link rel="stylesheet" th:href="@{css/profileStyle.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/guest.css}"/>
+</head>
+
+<div th:replace="~{fragments/header_customer :: header}"></div>
+
+<main class="container-fluid row" style="padding: 0; margin: 0">
+
+    <div th:replace="~{fragments/sidebar_services :: div}"></div>
+
+    <div class="col-3"></div>
+    <div class="col-9" data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" tabindex="0"
+         style="padding: 0;">
+        <div class="container py-4">
+            <h2 class="mb-3 text-center fw-bold" style="font-size: 50px; color: #1768b2; ">Basic Information</h2>
+
+            <div class="mb-3">
+                <label for="fullName" class="form-label fw-bold">Full Name</label>
+                <input type="text" readonly class="form-control" id="fullName"
+                       th:value="${session.customer.firstName + ' ' + session.customer.lastName}">
+            </div>
+            <div class="mb-3">
+                <th:block th:if="${session.customer.locationId == null}">
+                    <label for="locationNull" class="form-label fw-bold">Location Detail</label>
+                    <div class="form-control" id="locationNull" style="color: red; font-weight: bold;">Empty</div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="provinceNull" class="form-label fw-bold">Province</label>
+                            <div class="form-control" id="provinceNull" style="color: red; font-weight: bold;">Empty
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="cityNull" class="form-label fw-bold">City</label>
+                            <div class="form-control" id="cityNull" style="color: red; font-weight: bold;">Empty</div>
+                        </div>
+                        <div class="col">
+                            <label for="districtNull" class="form-label fw-bold">District</label>
+                            <div class="form-control" id="districtNull" style="color: red; font-weight: bold;">Empty
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:if="${session.customer.locationId != null}">
+                    <label for="locationDetail" class="form-label fw-bold">Location Detail</label>
+                    <input type="text" readonly class="form-control" id="locationDetail"
+                           th:value="${session.customer.locationId.locationDetail}">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="province" class="form-label fw-bold">Province</label>
+                            <input type="text" readonly class="form-control" id="province"
+                                   th:value="${session.customer.locationId.provinceId.provinceName}">
+                        </div>
+                        <div class="col">
+                            <label for="city" class="form-label fw-bold">City</label>
+                            <input type="text" readonly class="form-control" id="city"
+                                   th:value="${session.customer.locationId.cityId.cityName}">
+                        </div>
+                        <div class="col">
+                            <label for="district" class="form-label fw-bold">District</label>
+                            <input type="text" readonly class="form-control" id="district"
+                                   th:value="${session.customer.locationId.districtId.districtName}">
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label fw-bold">Phone Number(Contact)</label>
+                <input type="tel" readonly class="form-control" id="phoneNumber"
+                       th:value="${session.customer.phoneNumber}">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="padding: 15px;">
+            <a th:href="@{/edit_profile}"
+               class="text-decoration-none btn btn-primary btn-success" style="width: 80%; ">Edit</a>
+        </div>
+        <div th:replace="~{fragments/footer :: div}"></div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/AccountDropDown.js}"></script>
+</body>
+</html>

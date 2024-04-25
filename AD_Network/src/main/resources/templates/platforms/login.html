@@ -10,7 +10,7 @@
 <div class="container" id="container">
     <!--Phần đăng nhập của Employee-->
     <div class="form-container sign-up-container">
-        <form method="POST">
+        <form>
             <h1>Employee</h1>
             <input type="email" placeholder="Email" required/>
             <input type="password" placeholder="Password" required/>
@@ -19,11 +19,16 @@
     </div>
     <!--Phần đăng nhập của Customer-->
     <div class="form-container sign-in-container log-in-container">
-        <form th:action="@{/authenticateTheUser}" method="POST">
+        <form th:action="@{/loginCustomer}" method="POST">
             <h1>Customer</h1>
-            <input type="tel" placeholder="Telephone Number" name="phoneNumber" required/>
+            <input type="tel" placeholder="Telephone Number" name="username" required/>
             <input type="password" placeholder="Password" name="password" required/>
-            <button class="signin" name="action" type="submit">Sign In</button>
+            <th:block th:if="${param.error}">
+                <p style="color: red; font-weight: bold; margin: 5px;">
+                    Account or password is incorrect
+                </p>
+            </th:block>
+            <button name="action" type="submit">Sign In</button>
             <p>Don't have an account? <a class="anchor" id="regisCus">Registration</a></p>
         </form>
     </div>

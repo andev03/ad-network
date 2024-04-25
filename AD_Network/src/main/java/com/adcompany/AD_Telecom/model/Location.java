@@ -20,15 +20,15 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int locationId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "provinceId", referencedColumnName = "provinceId")
     private Province provinceId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "cityId", referencedColumnName = "cityId")
     private City cityId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "districtId", referencedColumnName = "districtId")
     private District districtId;
 

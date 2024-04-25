@@ -1,6 +1,7 @@
 package com.adcompany.AD_Telecom.dao;
 
 import com.adcompany.AD_Telecom.model.Service;
+import com.adcompany.AD_Telecom.model.ServiceType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class ServiceDAOImpl implements ServiceDAO {
     }
 
     @Override
-    public List<Service> getServiceType() {
-        TypedQuery<Service> query = entityManager.createQuery("Select st From ServiceType st", Service.class);
+    public List<ServiceType> getServiceType() {
+        TypedQuery<ServiceType> query = entityManager.createQuery("Select st From ServiceType st", ServiceType.class);
         return query.getResultList();
     }
 

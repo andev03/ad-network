@@ -9,7 +9,7 @@
 <body>
 <header class="container-fluid row sticky-top bg-white" style="height: 100px; padding: 0; margin: 0">
     <div class="col-3 d-flex flex-wrap justify-content-center imgBrand" style="height: 100%; padding: 0">
-        <a th:href="">
+        <a th:href="@{/}">
             <img th:src="@{/img/brand.png}" alt="A&D Telecom" title="A&D Telecom" style="width: 100px"/>
         </a>
         <!-- Middle content header-->
@@ -29,7 +29,7 @@
         </form>
         <!-- Login và Sign-up-->
         <div class="text-end">
-            <h5>Welcome back, ${session.customer.firstName + ' ' + session.customer.lastName}</h5>
+            <h5 th:text="${'Welcome back, ' + session.customer.firstName + ' ' + session.customer.lastName}"></h5>
         </div>
     </div>
 
@@ -40,11 +40,11 @@
            href="#">
             <img th:src="@{/img/icon/person-fill-add.svg}" alt="A&D Telecom" title="A&D Telecom"
                  style="width: 40px; height: 100px"/>
-            <strong>${session.customer.firstName + ' ' + session.customer.lastName}</strong>
+            <strong th:text="${session.customer.firstName + ' ' + session.customer.lastName}"></strong>
         </a>
 
         <ul class="dropdown-menu text-small shadow" style="width: 25%; margin-left: 0">
-            <li><a class="dropdown-item" th:href="">Profile</a></li>
+            <li><a class="dropdown-item" th:href="@{/customer/profile}">Profile</a></li>
             <li><a class="dropdown-item" onclick="return window.confirm('You don\'t have any Contract yet!')"
                    style="cursor: pointer;">Contract</a></li>
             <li><a class="dropdown-item" onclick="return window.confirm('You don\'t have any Request History yet!')"
@@ -52,8 +52,10 @@
             <li>
                 <hr class="dropdown-divider"/>
             </li>
-            <form action="">
-                <button class="dropdown-item">Sign out</button>
+            <form th:action="@{/logout}" method="POST">
+                <button class="dropdown-item"
+                        onclick="return window.confirm('Are you sure you want to sign out?')">Sign out
+                </button>
             </form>
         </ul>
     </div>

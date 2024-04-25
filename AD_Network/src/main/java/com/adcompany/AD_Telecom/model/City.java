@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "provinceId"})
 @Entity
 @Table(name = "City")
 public class City {
@@ -23,7 +23,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cityId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "provinceId", referencedColumnName = "provinceId")
     private Province provinceId;
 

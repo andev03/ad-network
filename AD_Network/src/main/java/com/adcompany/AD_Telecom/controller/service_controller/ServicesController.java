@@ -7,24 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/services")
-public class ServiceController {
+public class ServicesController {
 
     private final ServiceManagerService serviceManagerService;
 
     @Autowired
-    public ServiceController(ServiceManagerService serviceManagerService) {
+    public ServicesController(ServiceManagerService serviceManagerService) {
         this.serviceManagerService = serviceManagerService;
     }
 
     @GetMapping("/{serviceTypeName}")
     private String getService(@PathVariable String serviceTypeName, Model theModel) {
         theModel.addAttribute("services", serviceManagerService.getServiceByTypeName(serviceTypeName));
-        theModel.addAttribute("theServiceType", serviceManagerService.getServiceType());
         theModel.addAttribute("serviceTypeName", serviceTypeName);
-        return "views/customer/services/view_services_guest";
+        return "view_services";
     }
 }

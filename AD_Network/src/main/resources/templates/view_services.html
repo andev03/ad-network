@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/guest.css}"/>
+    <link rel="stylesheet" th:href="@{/css/deviceSerStyle.css}"/>
+    <title>Service</title>
+</head>
+<body style="margin: 0">
+
+<th:block th:if="${session.customer == null}">
+    <div th:replace="~{fragments/header_guest :: header}"></div>
+</th:block>
+<th:block th:if="${session.customer != null}">
+    <div th:replace="~{fragments/header_customer :: header}"></div>
+</th:block>
+
+<main class="container-fluid row" style="padding: 0; margin: 0">
+
+    <div th:replace="~{fragments/sidebar_services :: div}"></div>
+
+    <div class="col-3"></div>
+    <div class="col-9" data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" tabindex="0"
+         style="padding: 0;">
+
+
+        <th:block th:switch="${serviceTypeName}">
+            <img th:case="internet" th:src="@{/img/banner_service/bs_internet.png}" style="width: 100%">
+            <img th:case="cloud" th:src="@{/img/banner_service/bs_cloud.png}" style="width: 100%">
+            <img th:case="camera" th:src="@{/img/banner_service/bs_camera.png}" style="width: 100%">
+            <img th:case="television" th:src="@{/img/banner_service/bs_television.png}" style="width: 100%">
+            <img th:case="*" th:src="@{/img/banner_service/bs_internet.png}" style="width: 100%">
+        </th:block>
+
+        <th:block th:if="${session.customer == null}">
+            <div class="d-flex justify-content-center" style="margin-top: 60px">
+                <button type="button" class="btn btn-primary position-relative" style="width: 100px; height: 50px"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        onclick="return window.confirm('You must be LOGGED in to perform this task!')">
+                    Cart
+                </button>
+            </div>
+        </th:block>
+
+        <div id="service" class="container" style="padding: 70px 0 55px 0px;">
+            <div class="row justify-content-around" style="margin: 0">
+                <th:block th:each="service : ${services}">
+                    <div class="col-lg-5 service" style="margin-bottom: 3em;">
+                        <th:block th:switch="${serviceTypeName}">
+                            <img th:case="internet" th:src="@{/img/banner_device/bd_internet.png}" style="width: 100%">
+                            <img th:case="cloud" th:src="@{/img/banner_device/bd_cloud.png}" style="width: 100%">
+                            <img th:case="camera" th:src="@{/img/banner_device/bd_camera.png}" style="width: 100%">
+                            <img th:case="television" th:src="@{/img/banner_device/bd_television.png}"
+                                 style="width: 100%">
+                            <img th:case="*" th:src="@{/img/banner_device/bd_internet.png}" style="width: 100%">
+                        </th:block>
+                        <h2 class="fw-normal" style="color:#ff0000" th:text="${service.serviceName}"></h2>
+                        <h5 style="color: green" th:text="${service.deviceId.deviceName}"></h5>
+                        <p th:text="${service.deviceId.deviceDetail}"></p>
+                        <div style="color: #0000ff">
+                            <h4 th:text="${#numbers.formatInteger((service.price * 1000), 3, 'POINT') + 'đ/tháng'}">
+                                đ/tháng</h4>
+                        </div>
+
+                        <th:block th:switch="${service.serviceStatusId.serviceStatusName}">
+                            <div th:case="'Hết hàng'" style="width: 100%; display: flex; justify-content: flex-end;">
+                                <button class="CartBtn"
+                                        style="margin-right: 20px; background-color: #ff3333; color: white">Sold Out
+                                </button>
+                                <button class="CartBtn" style="color: white">Sold Out</button>
+                            </div>
+                            <th:block th:case="*">
+                                <th:block th:if="${session.customer == null}">
+                                    <div style="width: 100%; display: flex; justify-content: flex-end;">
+                                        <button class="CartBtn" style="margin-right: 20px; background-color: #ff3333 "
+                                                onclick="return window.confirm('You must be LOGGED in to perform this task!')">
+                                            <span class="IconContainer"><p class="fa fa-shopping-cart"></p></span>
+                                            <p class="text">BUY NOW </p></button>
+                                        <button class="CartBtn"
+                                                onclick="return window.confirm('You must be LOGGED in to perform this task!')">
+                                            <span class="IconContainer"><p class="fa fa-shopping-cart"></p></span>
+                                            <p class="text">Add to Cart</p></button>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${session.customer != null}">
+                                    <th:block th:if="${session.customer.locationId != null}">
+                                        <div style="width: 100%; display: flex; justify-content: flex-end;">
+                                            <form action="/AD_Network/MainController" method="post">
+                                                <input type="hidden" name="action" value="buyAction">
+                                                <input type="hidden" name="typeBuy" value="buyNow"/>
+                                                <input type="hidden" name="service" value="${camera.serviceId}">
+                                                <button class="CartBtn"
+                                                        style="margin-right: 20px; background-color: #ff3333 "><span
+                                                        class="IconContainer"><p class="fa fa-shopping-cart"></p></span>
+                                                    <p class="text">BUY NOW </p></button>
+                                                <select name="transCycleBuyNow" class="form-select text-center"
+                                                        style="width:87%; margin:5px 0;">
+                                                    <option value="1">1 month</option>
+                                                    <option value="6">6 months</option>
+                                                    <option value="12">12 months</option>
+                                                </select>
+                                            </form>
+                                            <form action="/AD_Network/MainController" method="get">
+                                                <input type="hidden" name="action" value="addToCart">
+                                                <input type="hidden" name="pageAction" value="camera">
+                                                <input type="hidden" name="service" value="${camera.serviceId}">
+                                                <button class="CartBtn"><span class="IconContainer"><p
+                                                        class="fa fa-shopping-cart"></p></span>
+                                                    <p class="text">Add to Cart</p></button>
+                                            </form>
+                                        </div>
+                                    </th:block>
+                                    <th:block th:if="${session.customer.locationId == null}">
+                                        <div style="width: 100%; display: flex; justify-content: flex-end;">
+                                            <button class="CartBtn"
+                                                    style="margin-right: 20px; background-color: #ff3333 "
+                                                    onclick="return window.confirm('You need to FILL in your location details or your identity number!')">
+                                                <span class="IconContainer"><p class="fa fa-shopping-cart"></p></span>
+                                                <p class="text">BUY NOW </p></button>
+                                            <button class="CartBtn"
+                                                    onclick="return window.confirm('You need to FILL in your location details or your identity number!')">
+                                                <span class="IconContainer"><p class="fa fa-shopping-cart"></p></span>
+                                                <p class="text">Add to Cart</p></button>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+        <div th:replace="~{fragments/footer :: div}"></div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cityId"})
 @Entity
 @Table(name = "Province")
 public class Province {

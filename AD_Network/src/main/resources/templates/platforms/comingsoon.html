@@ -8,7 +8,12 @@
 </head>
 <body style="margin: 0">
 <!-- Header of the website -->
-<div th:replace="~{/fragments/header_guest :: header}"></div>
+<th:block th:if="${session.customer == null}">
+    <div th:replace="~{fragments/header_guest :: header}"></div>
+</th:block>
+<th:block th:if="${session.customer != null}">
+    <div th:replace="~{fragments/header_customer :: header}"></div>
+</th:block>
 <main class="container-fluid row" style="padding: 0; margin: 0">
     <div th:replace="~{/fragments/sidebar_services :: div}"></div>
 
