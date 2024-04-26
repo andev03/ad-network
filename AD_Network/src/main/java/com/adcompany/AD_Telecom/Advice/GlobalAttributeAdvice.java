@@ -13,11 +13,11 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalAttributeAdvice {
 
-    private ServiceManagerService serviceManagerService;
+    private final ServiceManagerService serviceManagerService;
 
 
     @Autowired
-    public GlobalAttributeAdvice(ServiceManagerService serviceManagerService, CustomerRepository customerRepository) {
+    public GlobalAttributeAdvice(ServiceManagerService serviceManagerService) {
         this.serviceManagerService = serviceManagerService;
     }
 
@@ -25,6 +25,5 @@ public class GlobalAttributeAdvice {
     public List<ServiceType> addServiceType() {
         return serviceManagerService.getServiceType();
     }
-
 
 }

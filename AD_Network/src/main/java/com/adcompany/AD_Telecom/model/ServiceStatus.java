@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @ToString
 // No serializable hibernateLazyInitializer and handler to avoid InvalidDefinitionException of Lazy loading
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

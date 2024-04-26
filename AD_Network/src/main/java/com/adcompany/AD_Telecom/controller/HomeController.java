@@ -2,6 +2,8 @@ package com.adcompany.AD_Telecom.controller;
 
 import com.adcompany.AD_Telecom.dao.CustomerRepository;
 import com.adcompany.AD_Telecom.model.Customer;
+import com.adcompany.AD_Telecom.service.CustomerService;
+import com.adcompany.AD_Telecom.service.CustomerServiceImpl;
 import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private ServiceManagerService serviceManagerService;
-
-    private CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
     @Autowired
-    public HomeController(ServiceManagerService serviceManagerService, CustomerRepository customerRepository) {
-        this.serviceManagerService = serviceManagerService;
-        this.customerRepository = customerRepository;
+    public HomeController(ServiceManagerService serviceManagerService, CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @GetMapping("/")
@@ -30,7 +29,7 @@ public class HomeController {
         String user = authentication.getName();
 
         if (!user.equalsIgnoreCase("anonymousUser")) {
-            session.setAttribute("customer", customerRepository.findByPhoneNumber(user));
+            session.setAttribute("customer", customerService.findByPhoneNumber(user));
         }
 
         return "homepage";

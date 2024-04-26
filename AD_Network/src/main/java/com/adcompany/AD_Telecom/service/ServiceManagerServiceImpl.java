@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ServiceManagerServiceImpl implements ServiceManagerService {
 
-    private ServiceDAO serviceDAO;
+    private final ServiceDAO serviceDAO;
 
     @Autowired
     public ServiceManagerServiceImpl(ServiceDAO serviceDAO) {

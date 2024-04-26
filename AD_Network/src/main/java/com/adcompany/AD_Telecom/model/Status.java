@@ -28,6 +28,10 @@ public class Status {
     @OneToMany(mappedBy = "cusId")
     private List<Customer> cusId;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "empId")
+    private List<Employee> empId;
+
     public Status(String statusName) {
         this.statusName = statusName;
     }
@@ -38,5 +42,13 @@ public class Status {
         }
         cusId.add(tempCustomer);
         tempCustomer.setStatusId(this);
+    }
+
+    private void addEmployee(Employee tempEmployee){
+        if (empId == null) {
+            empId = new ArrayList<>();
+        }
+        empId.add(tempEmployee);
+        tempEmployee.setStatusId(this);
     }
 }

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @ToString
 @Entity
 @Table(name = "Service")

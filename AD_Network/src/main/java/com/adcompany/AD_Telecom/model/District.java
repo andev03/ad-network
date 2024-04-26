@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cityId"})
 @Entity
@@ -20,7 +20,7 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int districtId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cityId", referencedColumnName = "cityId")
     private City cityId;
 

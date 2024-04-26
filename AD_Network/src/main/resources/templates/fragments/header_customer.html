@@ -29,7 +29,7 @@
         </form>
         <!-- Login và Sign-up-->
         <div class="text-end">
-            <h5 th:text="${'Welcome back, ' + session.customer.firstName + ' ' + session.customer.lastName}"></h5>
+            <h5 th:text="${'Welcome, ' + session.customer.firstName + ' ' + session.customer.lastName}"></h5>
         </div>
     </div>
 
@@ -45,10 +45,8 @@
 
         <ul class="dropdown-menu text-small shadow" style="width: 25%; margin-left: 0">
             <li><a class="dropdown-item" th:href="@{/customer/profile}">Profile</a></li>
-            <li><a class="dropdown-item" onclick="return window.confirm('You don\'t have any Contract yet!')"
-                   style="cursor: pointer;">Contract</a></li>
-            <li><a class="dropdown-item" onclick="return window.confirm('You don\'t have any Request History yet!')"
-                   style="cursor: pointer;">History</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" th:href="@{'/customer/contract' + ${session.customer.cusId}}">Contract</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;">History</a></li>
             <li>
                 <hr class="dropdown-divider"/>
             </li>

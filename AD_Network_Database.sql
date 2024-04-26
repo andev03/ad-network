@@ -1,8 +1,8 @@
 ﻿Use AD_Network
 
 CREATE TABLE City (cityId int NOT NULL, provinceId int NOT NULL, cityName nvarchar(255) NULL, PRIMARY KEY (cityId));
-CREATE TABLE [Contract] (contractId int IDENTITY NOT NULL, cusId int NOT NULL, empId int, contractTypeId int NOT NULL, contractStatusId int NOT NULL, startDate datetime NOT NULL, endDate datetime NOT NULL, renewalCount int NOT NULL, PRIMARY KEY (contractId));
-CREATE TABLE ContractRenew (contractRenewId int IDENTITY NOT NULL, contractId int NOT NULL, renewContractDate datetime NOT NULL, lifeCycle int NOT NULL, startDate datetime NOT NULL, endDate datetime NOT NULL, PRIMARY KEY (contractRenewId));
+CREATE TABLE [Contract] (contractId int IDENTITY NOT NULL, cusId int NOT NULL, empId int, contractTypeId int NOT NULL, contractStatusId int NOT NULL, startDate date NOT NULL, endDate date NOT NULL, renewalCount int NOT NULL, PRIMARY KEY (contractId));
+CREATE TABLE ContractRenew (contractRenewId int IDENTITY NOT NULL, contractId int NOT NULL, contractTypeId int NOT NULL, renewContractDate date NOT NULL, startDate date NOT NULL, endDate date NOT NULL, PRIMARY KEY (contractRenewId));
 CREATE TABLE ContractService (serviceId int NOT NULL, contractId int NOT NULL, PRIMARY KEY (serviceId, contractId));
 CREATE TABLE ContractStatus (contractStatusId int IDENTITY NOT NULL, contractStatusName nvarchar(255) NOT NULL, PRIMARY KEY (contractStatusId));
 CREATE TABLE ContractType (contractTypeId int IDENTITY NOT NULL, contractTypeName nvarchar(255) NOT NULL, PRIMARY KEY (contractTypeId));
@@ -32,6 +32,7 @@ ALTER TABLE [Service] ADD CONSTRAINT FKService47190 FOREIGN KEY (serviceStatusId
 ALTER TABLE [Service] ADD CONSTRAINT FKService577357 FOREIGN KEY (serviceTypeId) REFERENCES ServiceType (serviceTypeId);
 ALTER TABLE [Service] ADD CONSTRAINT FKService69050 FOREIGN KEY (deviceId) REFERENCES Device (deviceId);
 ALTER TABLE ContractRenew ADD CONSTRAINT FKContractDe17005 FOREIGN KEY (contractId) REFERENCES [Contract] (contractId);
+ALTER TABLE ContractRenew ADD CONSTRAINT FKContractType FOREIGN KEY (contractTypeId) REFERENCES ContractType (contractTypeId);
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract988350 FOREIGN KEY (contractStatusId) REFERENCES ContractStatus (contractStatusId);
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract208628 FOREIGN KEY (contractTypeId) REFERENCES ContractType (contractTypeId);
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract76923 FOREIGN KEY (empId) REFERENCES Employee (empId);
@@ -11583,10 +11584,10 @@ INSERT INTO [Contract] (cusId, empId, contractTypeId, contractStatusId, startDat
 	(2, 2, 2, 4, '2023-09-15', '2024-03-15', 1),
 	(3, 1, 3, 4, '2023-03-30', '2024-03-30', 1);
 	
-INSERT INTO ContractRenew (contractId, renewContractDate, lifeCycle, startDate, endDate) VALUES 
-	(1, '2024-04-01', 1, '2024-04-01', '2024-02-01'),
-	(2, '2024-04-01', 6, '2024-04-01', '2025-10-01'),
-	(3, '2024-04-01', 12, '2024-04-01', '2025-04-01');
+INSERT INTO ContractRenew (contractId, contractTypeId, renewContractDate, startDate, endDate) VALUES 
+	(1, 1, '2024-04-01', '2024-04-01', '2024-02-01'),
+	(2, 2, '2024-04-01', '2024-04-01', '2025-10-01'),
+	(3, 3, '2024-04-01', '2024-04-01', '2025-04-01');
 
 INSERT INTO ContractService (serviceId, contractId) VALUES 
 	(1, 1),

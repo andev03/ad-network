@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cityId"})
 @Entity

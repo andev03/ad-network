@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Account Profile</title>
+    <title>Profile</title>
     <link rel="stylesheet" th:href="@{css/profileStyle.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/guest.css}"/>
@@ -27,12 +27,10 @@
             </div>
             <div class="mb-3">
                 <th:block th:if="${session.customer.locationId == null}">
-                    <label for="locationNull" class="form-label fw-bold">Location Detail</label>
-                    <div class="form-control" id="locationNull" style="color: red; font-weight: bold;">Empty</div>
                     <div class="row mb-3">
                         <div class="col">
-                            <label for="provinceNull" class="form-label fw-bold">Province</label>
-                            <div class="form-control" id="provinceNull" style="color: red; font-weight: bold;">Empty
+                            <label for="districtNull" class="form-label fw-bold">District</label>
+                            <div class="form-control" id="districtNull" style="color: red; font-weight: bold;">Empty
                             </div>
                         </div>
                         <div class="col">
@@ -40,17 +38,21 @@
                             <div class="form-control" id="cityNull" style="color: red; font-weight: bold;">Empty</div>
                         </div>
                         <div class="col">
-                            <label for="districtNull" class="form-label fw-bold">District</label>
-                            <div class="form-control" id="districtNull" style="color: red; font-weight: bold;">Empty
+                            <label for="provinceNull" class="form-label fw-bold">Province</label>
+                            <div class="form-control" id="provinceNull" style="color: red; font-weight: bold;">Empty
                             </div>
                         </div>
                     </div>
+                    <label for="locationNull" class="form-label fw-bold">Location Detail</label>
+                    <div class="form-control" id="locationNull" style="color: red; font-weight: bold;">Empty</div>
                 </th:block>
                 <th:block th:if="${session.customer.locationId != null}">
-                    <label for="locationDetail" class="form-label fw-bold">Location Detail</label>
-                    <input type="text" readonly class="form-control" id="locationDetail"
-                           th:value="${session.customer.locationId.locationDetail}">
                     <div class="row mb-3">
+                        <div class="col">
+                            <label for="district" class="form-label fw-bold">District</label>
+                            <input type="text" readonly class="form-control" id="district"
+                                   th:value="${session.customer.locationId.districtId.districtName}">
+                        </div>
                         <div class="col">
                             <label for="province" class="form-label fw-bold">Province</label>
                             <input type="text" readonly class="form-control" id="province"
@@ -61,16 +63,14 @@
                             <input type="text" readonly class="form-control" id="city"
                                    th:value="${session.customer.locationId.cityId.cityName}">
                         </div>
-                        <div class="col">
-                            <label for="district" class="form-label fw-bold">District</label>
-                            <input type="text" readonly class="form-control" id="district"
-                                   th:value="${session.customer.locationId.districtId.districtName}">
-                        </div>
                     </div>
+                    <label for="locationDetail" class="form-label fw-bold">Location Detail</label>
+                    <input type="text" readonly class="form-control" id="locationDetail"
+                           th:value="${session.customer.locationId.locationDetail}">
                 </th:block>
             </div>
             <div class="mb-3">
-                <label for="phoneNumber" class="form-label fw-bold">Phone Number(Contact)</label>
+                <label for="phoneNumber" class="form-label fw-bold">Phone Number</label>
                 <input type="tel" readonly class="form-control" id="phoneNumber"
                        th:value="${session.customer.phoneNumber}">
             </div>

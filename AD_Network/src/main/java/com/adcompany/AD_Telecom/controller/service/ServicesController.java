@@ -1,4 +1,4 @@
-package com.adcompany.AD_Telecom.controller.service_controller;
+package com.adcompany.AD_Telecom.controller.service;
 
 import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import org.springframework.beans.factory.annotation.Autowired;

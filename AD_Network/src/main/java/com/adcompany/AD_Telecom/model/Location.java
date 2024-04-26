@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
