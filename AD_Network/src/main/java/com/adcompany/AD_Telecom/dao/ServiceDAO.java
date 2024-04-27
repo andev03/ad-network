@@ -1,7 +1,7 @@
 package com.adcompany.AD_Telecom.dao;
 
-import com.adcompany.AD_Telecom.model.Service;
-import com.adcompany.AD_Telecom.model.ServiceType;
+import com.adcompany.AD_Telecom.entity.Service;
+import com.adcompany.AD_Telecom.entity.ServiceType;
 
 import java.util.List;
 

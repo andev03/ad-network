@@ -1,9 +1,6 @@
 package com.adcompany.AD_Telecom.controller;
 
-import com.adcompany.AD_Telecom.dao.CustomerRepository;
-import com.adcompany.AD_Telecom.model.Customer;
 import com.adcompany.AD_Telecom.service.CustomerService;
-import com.adcompany.AD_Telecom.service.CustomerServiceImpl;
 import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

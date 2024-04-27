@@ -1,4 +1,4 @@
-package com.adcompany.AD_Telecom.model;
+package com.adcompany.AD_Telecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

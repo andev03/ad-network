@@ -1,4 +1,4 @@
-package com.adcompany.AD_Telecom.model;
+package com.adcompany.AD_Telecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,26 +8,31 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor(force = true)
 @ToString
 // No serializable hibernateLazyInitializer and handler to avoid InvalidDefinitionException of Lazy loading
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "ServiceStatus")
-public class ServiceStatus {
+@Table(name = "ServiceType")
+public class ServiceType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceStatusId;
+    private int serviceTypeId;
 
-    private String serviceStatusName;
+    private String serviceTypeName;
+
+    private String description;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "serviceStatusId")
+    @OneToMany(mappedBy = "serviceTypeId")
     private List<Service> services;
 
-    public ServiceStatus(String serviceStatusName) {
-        this.serviceStatusName = serviceStatusName;
+    public ServiceType(String serviceTypeName, String description) {
+        this.serviceTypeName = serviceTypeName;
+        this.description = description;
     }
 
     public void add(Service tempService) {
@@ -37,6 +42,6 @@ public class ServiceStatus {
 
         services.add(tempService);
 
-        tempService.setServiceStatusId(this);
+        tempService.setServiceTypeId(this);
     }
 }

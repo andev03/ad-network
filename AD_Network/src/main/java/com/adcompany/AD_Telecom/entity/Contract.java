@@ -1,17 +1,20 @@
-package com.adcompany.AD_Telecom.model;
+package com.adcompany.AD_Telecom.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor(force = true)
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Contract")
 public class Contract {
@@ -42,6 +45,10 @@ public class Contract {
 
     private int renewalCount;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "transactionId")
+    private List<Transactions> transactionId;
+
     public Contract(Customer cusId, Employee empId, ContractType contractTypeId, ContractStatus contractStatusId, Date startDate, Date endDate, int renewalCount) {
         this.cusId = cusId;
         this.empId = empId;
@@ -50,5 +57,14 @@ public class Contract {
         this.startDate = startDate;
         this.endDate = endDate;
         this.renewalCount = renewalCount;
+    }
+
+    public void addTransaction(Transactions tempTransaction) {
+        if (transactionId == null) {
+            transactionId = new ArrayList<>();
+        }
+
+        transactionId.add(tempTransaction);
+        tempTransaction.setContractId(this);
     }
 }

@@ -1,7 +1,6 @@
-package com.adcompany.AD_Telecom.model;
+package com.adcompany.AD_Telecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor(force = true)
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "contractId", "password"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "contractId"})
 @Entity
 @Table(name = "Customer")
 public class Customer {

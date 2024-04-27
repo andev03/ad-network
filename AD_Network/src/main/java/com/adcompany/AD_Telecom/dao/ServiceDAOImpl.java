@@ -1,7 +1,7 @@
 package com.adcompany.AD_Telecom.dao;
 
-import com.adcompany.AD_Telecom.model.Service;
-import com.adcompany.AD_Telecom.model.ServiceType;
+import com.adcompany.AD_Telecom.entity.Service;
+import com.adcompany.AD_Telecom.entity.ServiceType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.adcompany.AD_Telecom.service;
 
 import com.adcompany.AD_Telecom.dao.ContractDAO;
-import com.adcompany.AD_Telecom.model.Contract;
-import com.adcompany.AD_Telecom.model.Customer;
+import com.adcompany.AD_Telecom.entity.Contract;
+import com.adcompany.AD_Telecom.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

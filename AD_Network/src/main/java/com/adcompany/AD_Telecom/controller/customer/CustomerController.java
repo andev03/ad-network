@@ -1,8 +1,7 @@
 package com.adcompany.AD_Telecom.controller.customer;
 
-import com.adcompany.AD_Telecom.model.Customer;
+import com.adcompany.AD_Telecom.entity.Customer;
 import com.adcompany.AD_Telecom.service.ContractService;
-import com.adcompany.AD_Telecom.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

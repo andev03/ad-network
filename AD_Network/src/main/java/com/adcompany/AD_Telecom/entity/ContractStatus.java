@@ -1,4 +1,4 @@
-package com.adcompany.AD_Telecom.model;
+package com.adcompany.AD_Telecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,29 +15,29 @@ import java.util.List;
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "ContractType")
-public class ContractType {
+@Table(name = "ContractStatus")
+public class ContractStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contractTypeId;
+    private int contractStatusId;
 
-    private String contractTypeName;
+    private String contractStatusName;
 
     @JsonBackReference
     @OneToMany(mappedBy = "contractId")
     private List<Contract> contractId;
 
-    public ContractType(String contractTypeName) {
-        this.contractTypeName = contractTypeName;
+    public ContractStatus(String contractStatusName) {
+        this.contractStatusName = contractStatusName;
     }
 
-    public void addContract(Contract tempContract){
-        if (contractId == null){
+    public void addContract(Contract tempContract) {
+        if (contractId == null) {
             contractId = new ArrayList<>();
         }
 
         contractId.add(tempContract);
-        tempContract.setContractTypeId(this);
+        tempContract.setContractStatusId(this);
     }
 }

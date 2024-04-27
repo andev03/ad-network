@@ -1,8 +1,6 @@
 package com.adcompany.AD_Telecom.Advice;
 
-import com.adcompany.AD_Telecom.dao.CustomerRepository;
-import com.adcompany.AD_Telecom.model.Service;
-import com.adcompany.AD_Telecom.model.ServiceType;
+import com.adcompany.AD_Telecom.entity.ServiceType;
 import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +12,6 @@ import java.util.List;
 public class GlobalAttributeAdvice {
 
     private final ServiceManagerService serviceManagerService;
-
 
     @Autowired
     public GlobalAttributeAdvice(ServiceManagerService serviceManagerService) {

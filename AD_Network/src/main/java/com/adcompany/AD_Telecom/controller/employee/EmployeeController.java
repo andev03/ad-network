@@ -1,13 +1,10 @@
 package com.adcompany.AD_Telecom.controller.employee;
 
-import com.adcompany.AD_Telecom.dao.ContractDAO;
-import com.adcompany.AD_Telecom.dao.ContractDAOImpl;
-import com.adcompany.AD_Telecom.model.Contract;
-import com.adcompany.AD_Telecom.model.Customer;
-import com.adcompany.AD_Telecom.service.ContractService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.adcompany.AD_Telecom.entity.Service;
+import com.adcompany.AD_Telecom.entity.Transactions;
+import com.adcompany.AD_Telecom.model.ServiceModel;
+import com.adcompany.AD_Telecom.service.ServiceManagerService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,14 +12,14 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
-    private final ContractService contractService;
+    private final ServiceManagerService serviceManagerService;
 
-    public EmployeeController(ContractService contractService) {
-        this.contractService = contractService;
+    public EmployeeController(ServiceManagerService serviceManagerService) {
+        this.serviceManagerService = serviceManagerService;
     }
 
-    @GetMapping("/hehe{cusId}")
-    public List<Contract> contract(@PathVariable Customer cusId) {
-        return contractService.getContractByCusId(cusId);
+    @GetMapping("/hhhhh")
+    public List<ServiceModel> serviceModels(){
+        return serviceManagerService.getServiceByTypeName("internet");
     }
 }
