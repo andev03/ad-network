@@ -56,14 +56,14 @@
                             <img th:case="*" th:src="@{/img/banner_device/bd_internet.png}" style="width: 100%">
                         </th:block>
                         <h2 class="fw-normal" style="color:#ff0000" th:text="${service.serviceName}"></h2>
-                        <h5 style="color: green" th:text="${service.deviceId.deviceName}"></h5>
-                        <p th:text="${service.deviceId.deviceDetail}"></p>
+                        <h5 style="color: green" th:text="${service.device.deviceName}"></h5>
+                        <p th:text="${service.device.deviceDetail}"></p>
                         <div style="color: #0000ff">
                             <h4 th:text="${#numbers.formatInteger((service.price * 1000), 3, 'POINT') + 'đ/tháng'}">
                                 đ/tháng</h4>
                         </div>
 
-                        <th:block th:switch="${service.serviceStatusName}">
+                        <th:block th:switch="${service.serviceStatus.serviceStatusName}">
                             <div th:case="'Hết hàng'" style="width: 100%; display: flex; justify-content: flex-end;">
                                 <button class="CartBtn"
                                         style="margin-right: 20px; background-color: #ff3333; color: white">Sold Out
@@ -84,7 +84,7 @@
                                     </div>
                                 </th:block>
                                 <th:block th:if="${session.customer != null}">
-                                    <th:block th:if="${session.customer.locationId != null}">
+                                    <th:block th:if="${session.customer.location != null}">
                                         <div style="width: 100%; display: flex; justify-content: flex-end;">
                                             <form action="/AD_Network/MainController" method="post">
                                                 <input type="hidden" name="action" value="buyAction">
@@ -111,7 +111,7 @@
                                             </form>
                                         </div>
                                     </th:block>
-                                    <th:block th:if="${session.customer.locationId == null}">
+                                    <th:block th:if="${session.customer.location == null}">
                                         <div style="width: 100%; display: flex; justify-content: flex-end;">
                                             <button class="CartBtn"
                                                     style="margin-right: 20px; background-color: #ff3333 "

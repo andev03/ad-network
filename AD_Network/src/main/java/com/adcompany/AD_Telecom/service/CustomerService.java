@@ -1,7 +1,8 @@
 package com.adcompany.AD_Telecom.service;
 
 import com.adcompany.AD_Telecom.entity.Customer;
+import com.adcompany.AD_Telecom.model.CustomerModel;
 
 public interface CustomerService {
-    Customer findByPhoneNumber(String phoneNumber);
+    CustomerModel findByPhoneNumber(String phoneNumber);
 }

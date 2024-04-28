@@ -27,13 +27,13 @@
             </tr>
             </thead>
             <tbody style="font-weight: bold;">
-            <th:block th:each="contract : ${contract}">
+            <th:block th:each="contract : ${contracts}">
                 <tr>
                     <td>1</td>
-                    <td th:text="${#dates.format(contract.startDate, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${#dates.format(contract.endDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${contract.startDate}"></td>
+                    <td th:text="${contract.endDate}"></td>
                     <td>Amount</td>
-                    <td th:text="${contract.contractStatusId.contractStatusName}"></td>
+                    <td th:text="${contract.contractStatusName}"></td>
                     <td><a href="#">View</a></td>
                 </tr>
             </th:block>

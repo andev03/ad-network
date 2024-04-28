@@ -16,7 +16,7 @@ public class ServiceManagerServiceImpl implements ServiceManagerService {
 
     private final ServiceMapper serviceMapper;
 
-    @Autowired
+    @Autowired(required = true)
     public ServiceManagerServiceImpl(ServiceDAO serviceDAO, ServiceMapper serviceMapper) {
         this.serviceDAO = serviceDAO;
         this.serviceMapper = serviceMapper;

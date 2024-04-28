@@ -26,7 +26,7 @@
                        th:value="${session.customer.firstName + ' ' + session.customer.lastName}">
             </div>
             <div class="mb-3">
-                <th:block th:if="${session.customer.locationId == null}">
+                <th:block th:if="${session.customer.location == null}">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="districtNull" class="form-label fw-bold">District</label>
@@ -46,27 +46,27 @@
                     <label for="locationNull" class="form-label fw-bold">Location Detail</label>
                     <div class="form-control" id="locationNull" style="color: red; font-weight: bold;">Empty</div>
                 </th:block>
-                <th:block th:if="${session.customer.locationId != null}">
+                <th:block th:if="${session.customer.location != null}">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="district" class="form-label fw-bold">District</label>
                             <input type="text" readonly class="form-control" id="district"
-                                   th:value="${session.customer.locationId.districtId.districtName}">
+                                   th:value="${session.customer.location.districtName}">
                         </div>
                         <div class="col">
                             <label for="province" class="form-label fw-bold">Province</label>
                             <input type="text" readonly class="form-control" id="province"
-                                   th:value="${session.customer.locationId.provinceId.provinceName}">
+                                   th:value="${session.customer.location.provinceName}">
                         </div>
                         <div class="col">
                             <label for="city" class="form-label fw-bold">City</label>
                             <input type="text" readonly class="form-control" id="city"
-                                   th:value="${session.customer.locationId.cityId.cityName}">
+                                   th:value="${session.customer.location.cityName}">
                         </div>
                     </div>
                     <label for="locationDetail" class="form-label fw-bold">Location Detail</label>
                     <input type="text" readonly class="form-control" id="locationDetail"
-                           th:value="${session.customer.locationId.locationDetail}">
+                           th:value="${session.customer.location.locationDetail}">
                 </th:block>
             </div>
             <div class="mb-3">

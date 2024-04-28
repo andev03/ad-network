@@ -25,7 +25,7 @@ public class CustomerController {
 
     @GetMapping("/contract{cusId}")
     public String contract(@PathVariable Customer cusId, Model theModel) {
-        theModel.addAttribute("contract", contractService.getContractByCusId(cusId));
+        theModel.addAttribute("contracts", contractService.getContractByCusId(cusId));
         return "views/customer/contract";
     }
 
