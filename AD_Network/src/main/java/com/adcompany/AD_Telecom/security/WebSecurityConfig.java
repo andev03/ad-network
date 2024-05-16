@@ -9,18 +9,27 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails an = User.withUsername("0123456789")
-                .password("{noop}123")
-                .build();
-        return new InMemoryUserDetailsManager(an);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        // define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "Select cusId, password, statusId from Customer where cusId=?");
+        // define query to retrieve the authorities/roles by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select cusId, role from roles where cusId=?"
+        );
+        return jdbcUserDetailsManager;
     }
 
     @Bean

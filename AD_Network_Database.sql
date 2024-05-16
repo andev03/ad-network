@@ -1,8 +1,8 @@
 ﻿Use AD_Network
 
 CREATE TABLE City (cityId int NOT NULL, provinceId int NOT NULL, cityName nvarchar(255) NULL, PRIMARY KEY (cityId));
-CREATE TABLE [Contract] (contractId int IDENTITY NOT NULL, cusId int NOT NULL, empId int, contractTypeId int NOT NULL, contractStatusId int NOT NULL, startDate date NOT NULL, endDate date NOT NULL, renewalCount int NOT NULL, PRIMARY KEY (contractId));
-CREATE TABLE ContractRenew (contractRenewId int IDENTITY NOT NULL, contractId int NOT NULL, contractTypeId int NOT NULL, renewContractDate date NOT NULL, startDate date NOT NULL, endDate date NOT NULL, PRIMARY KEY (contractRenewId));
+CREATE TABLE [Contract] (contractId int IDENTITY NOT NULL, cusId int NOT NULL, empId int, contractTypeId int NOT NULL, contractStatusId int NOT NULL, startDate date NOT NULL, endDate date NOT NULL, amount money NOT NULL, renewalCount int NOT NULL, PRIMARY KEY (contractId));
+CREATE TABLE ContractRenew (contractRenewId int IDENTITY NOT NULL, contractId int NOT NULL, contractTypeId int NOT NULL, renewContractDate date NOT NULL, startDate date NOT NULL, endDate date NOT NULL, amount money NOT NULL, PRIMARY KEY (contractRenewId));
 CREATE TABLE ContractService (serviceId int NOT NULL, contractId int NOT NULL, PRIMARY KEY (serviceId, contractId));
 CREATE TABLE ContractStatus (contractStatusId int IDENTITY NOT NULL, contractStatusName nvarchar(255) NOT NULL, PRIMARY KEY (contractStatusId));
 CREATE TABLE ContractType (contractTypeId int IDENTITY NOT NULL, contractTypeName nvarchar(255) NOT NULL, PRIMARY KEY (contractTypeId));
@@ -23,7 +23,7 @@ CREATE TABLE [Service] (serviceId int IDENTITY NOT NULL, deviceId int NOT NULL, 
 CREATE TABLE ServiceStatus (serviceStatusId int IDENTITY NOT NULL, serviceStatusName nvarchar(255) NOT NULL, PRIMARY KEY (serviceStatusId));
 CREATE TABLE ServiceType (serviceTypeId int IDENTITY NOT NULL, serviceTypeName nvarchar(255) NOT NULL, [description] nvarchar(Max),PRIMARY KEY (serviceTypeId));
 CREATE TABLE [Status] (statusId int IDENTITY NOT NULL, statusName nvarchar(255) NULL, PRIMARY KEY (statusId));
-CREATE TABLE [Transaction] (transactionId int IDENTITY NOT NULL, contractId int NOT NULL, paymentId int NOT NULL, transStatusId int NOT NULL, transTypeId int NOT NULL, transAmount money NOT NULL, transTime datetime NOT NULL, PRIMARY KEY (transactionId));
+CREATE TABLE [Transactions] (transactionId int IDENTITY NOT NULL, contractId int NOT NULL, paymentId int NOT NULL, transStatusId int NOT NULL, transTypeId int NOT NULL, transAmount money NOT NULL, transTime datetime NOT NULL, PRIMARY KEY (transactionId));
 CREATE TABLE TransStatus (transStatusId int IDENTITY NOT NULL, transStatusName nvarchar(255) NOT NULL, PRIMARY KEY (transStatusId));
 CREATE TABLE TransType (transTypeId int IDENTITY NOT NULL, transTypeName nvarchar(255) NOT NULL, PRIMARY KEY (transTypeId));
 ALTER TABLE ContractService ADD CONSTRAINT FKContractSe326912 FOREIGN KEY (contractId) REFERENCES Contract (contractId);
@@ -37,10 +37,10 @@ ALTER TABLE [Contract] ADD CONSTRAINT FKContract988350 FOREIGN KEY (contractStat
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract208628 FOREIGN KEY (contractTypeId) REFERENCES ContractType (contractTypeId);
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract76923 FOREIGN KEY (empId) REFERENCES Employee (empId);
 ALTER TABLE [Contract] ADD CONSTRAINT FKContract570254 FOREIGN KEY (cusId) REFERENCES Customer (cusId);
-ALTER TABLE [Transaction] ADD CONSTRAINT FKTransactio320398 FOREIGN KEY (contractId) REFERENCES Contract (contractId);
-ALTER TABLE [Transaction] ADD CONSTRAINT FKTransactio80961 FOREIGN KEY (paymentId) REFERENCES Payment (paymentId);
-ALTER TABLE [Transaction] ADD CONSTRAINT FKTransactio811031 FOREIGN KEY (transTypeId) REFERENCES TransType (transTypeId);
-ALTER TABLE [Transaction] ADD CONSTRAINT FKTransactio163501 FOREIGN KEY (transStatusId) REFERENCES TransStatus (transStatusId);
+ALTER TABLE [Transactions] ADD CONSTRAINT FKTransactio320398 FOREIGN KEY (contractId) REFERENCES Contract (contractId);
+ALTER TABLE [Transactions] ADD CONSTRAINT FKTransactio80961 FOREIGN KEY (paymentId) REFERENCES Payment (paymentId);
+ALTER TABLE [Transactions] ADD CONSTRAINT FKTransactio811031 FOREIGN KEY (transTypeId) REFERENCES TransType (transTypeId);
+ALTER TABLE [Transactions] ADD CONSTRAINT FKTransactio163501 FOREIGN KEY (transStatusId) REFERENCES TransStatus (transStatusId);
 ALTER TABLE Request ADD CONSTRAINT FKRequest372362 FOREIGN KEY (requestTypeId) REFERENCES RequestType (requestTypeId);
 ALTER TABLE Request ADD CONSTRAINT FKRequest218435 FOREIGN KEY (requestStatusId) REFERENCES RequestStatus (requestStatusId);
 ALTER TABLE Request ADD CONSTRAINT FKRequest748412 FOREIGN KEY (cusId) REFERENCES Customer (cusId);
@@ -11579,15 +11579,15 @@ INSERT INTO [ContractType] ([contractTypeName]) VALUES
 	(6),
 	(12);
 
-INSERT INTO [Contract] (cusId, empId, contractTypeId, contractStatusId, startDate, endDate, renewalCount) VALUES 
-	(1, 1, 1, 4, '2024-03-01', '2024-04-01', 1),
-	(2, 2, 2, 4, '2023-09-15', '2024-03-15', 1),
-	(3, 1, 3, 4, '2023-03-30', '2024-03-30', 1);
+INSERT INTO [Contract] (cusId, empId, contractTypeId, contractStatusId, startDate, endDate, amount, renewalCount) VALUES 
+	(1, 1, 1, 4, '2024-03-01', '2024-04-01', 390.000, 1),
+	(2, 2, 2, 4, '2023-09-15', '2024-03-15', 7860.000, 1),
+	(3, 1, 3, 4, '2023-03-30', '2024-03-30', 16800.000, 1);
 	
-INSERT INTO ContractRenew (contractId, contractTypeId, renewContractDate, startDate, endDate) VALUES 
-	(1, 1, '2024-04-01', '2024-04-01', '2024-02-01'),
-	(2, 2, '2024-04-01', '2024-04-01', '2025-10-01'),
-	(3, 3, '2024-04-01', '2024-04-01', '2025-04-01');
+INSERT INTO ContractRenew (contractId, contractTypeId, renewContractDate, startDate, endDate, amount) VALUES 
+	(1, 1, '2024-04-01', '2024-04-01', '2024-02-01', 390.000),
+	(2, 2, '2024-04-01', '2024-04-01', '2025-10-01', 7860.000),
+	(3, 3, '2024-04-01', '2024-04-01', '2025-04-01', 16800.000);
 
 INSERT INTO ContractService (serviceId, contractId) VALUES 
 	(1, 1),
@@ -11612,7 +11612,7 @@ INSERT INTO [TransType] ([transTypeName]) VALUES
 	(N'Mua Hàng'),
 	(N'Gia hạn hợp đồng');
 
-INSERT INTO [Transaction] (contractId, paymentId, transStatusId, transTypeId, transAmount, transTime) VALUES 
+INSERT INTO [Transactions] (contractId, paymentId, transStatusId, transTypeId, transAmount, transTime) VALUES 
 	(1, 2, 1, 1, 390.000, '2024-03-01 08:00:00'),
 	(2, 1, 1, 1, 7860.000, '2023-09-15 10:30:00'),
 	(3, 2, 2, 1, 16800.000, '2023-03-30 12:15:00'),

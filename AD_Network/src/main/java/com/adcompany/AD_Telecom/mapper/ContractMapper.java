@@ -9,7 +9,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {CustomerMapper.class, EmployeeMapper.class})
+@Mapper(componentModel = "spring", uses = {CustomerMapper.class, EmployeeMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ContractMapper {
 
     @Mapping(target = "customer", source = "cusId")
@@ -18,6 +18,7 @@ public interface ContractMapper {
     @Mapping(target = "contractStatusName", source = "contractStatusId.contractStatusName")
     @Mapping(target = "startDate", source = "startDate", dateFormat = "dd-MM-yyyy")
     @Mapping(target = "endDate", source = "endDate", dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "amount" , source = "amount")
     ContractModel toContractModel(Contract contract);
 
     @InheritInverseConfiguration(name = "toContractModel")

@@ -1,5 +1,6 @@
 package com.adcompany.AD_Telecom.dao;
 
+import com.adcompany.AD_Telecom.entity.Contract;
 import com.adcompany.AD_Telecom.entity.Employee;
 import com.adcompany.AD_Telecom.entity.Location;
 import com.adcompany.AD_Telecom.model.EmployeeModel;
@@ -23,8 +24,8 @@ public class ATestDao {
         return query.getSingleResult();
     }
 
-    public Employee employeeModel(int id){
-        TypedQuery<Employee> query = entityManager.createQuery("select e From Employee e Where e.empId = :data", Employee.class);
+    public Contract employeeModel(int id){
+        TypedQuery<Contract> query = entityManager.createQuery("select con From Contract con Where cusId = :data", Contract.class);
         query.setParameter("data", id);
         return query.getSingleResult();
     }

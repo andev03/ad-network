@@ -6,10 +6,11 @@ import com.adcompany.AD_Telecom.model.ServiceModel;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {DeviceMapper.class})
+@Mapper(componentModel = "spring", uses = {DeviceMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ServiceMapper {
     @Mapping(source = "deviceId", target = "device")
     @Mapping(source = "serviceTypeId", target = "serviceType")

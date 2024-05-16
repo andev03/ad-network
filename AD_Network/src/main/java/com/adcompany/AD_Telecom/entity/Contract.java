@@ -43,6 +43,8 @@ public class Contract {
 
     private Date endDate;
 
+    private double amount;
+
     private int renewalCount;
 
     @JsonBackReference

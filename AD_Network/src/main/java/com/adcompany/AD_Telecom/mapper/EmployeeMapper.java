@@ -10,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {LocationMapper.class, StatusMapper.class, RolesMapper.class})
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {LocationMapper.class, StatusMapper.class, RolesMapper.class})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public interface EmployeeMapper {
 

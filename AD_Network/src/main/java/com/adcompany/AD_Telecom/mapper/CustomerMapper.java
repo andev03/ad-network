@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {LocationMapper.class, StatusMapper.class})
+@Mapper(componentModel = "spring", uses = {LocationMapper.class, StatusMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CustomerMapper {
 
     @Mapping(target = "statusName", source = "statusId.statusName")

@@ -1,4 +1,4 @@
-package com.adcompany.AD_Telecom.Advice;
+package com.adcompany.AD_Telecom.advice;
 
 import com.adcompany.AD_Telecom.entity.ServiceType;
 import com.adcompany.AD_Telecom.service.ServiceManagerService;

@@ -15,6 +15,8 @@ public class ContractModel {
 
     private String endDate;
 
+    private double amount;
+
     private int renewalCount;
 
     private String contractStatusName;
